@@ -7,6 +7,7 @@ import Products from "./components/Shop/Products";
 import Notification from "./components/UI/Notification";
 import { uiActions } from "./store/ui-slice";
 import { CART_DATA_STATUS } from "./constants/cartData";
+import { sendCartData } from "./store/cart-slice";
 
 let isInitial = true;
 
@@ -21,26 +22,8 @@ function App() {
       isInitial = false;
       return;
     }
-    const sendCartData = async () => {
-      dispatch(uiActions.showNotification(CART_DATA_STATUS.PENDING));
-      const response = await fetch(
-        `${process.env.REACT_APP_FIREBASE_DB_URL}/cart.json`,
-        {
-          method: "PUT",
-          body: JSON.stringify(cart),
-        },
-      );
 
-      if (!response.ok) {
-        throw new Error("Sending cart data failed");
-      }
-
-      dispatch(uiActions.showNotification(CART_DATA_STATUS.SUCCESS));
-    };
-
-    sendCartData().catch((error) => {
-      dispatch(uiActions.showNotification(CART_DATA_STATUS.ERROR));
-    });
+    dispatch(sendCartData(cart));
   }, [cart, dispatch]);
 
   return (
