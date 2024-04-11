@@ -9,9 +9,14 @@ export const CART_DATA_STATUS = {
     title: "Sending",
     message: "Sending cart data!",
   },
-  ERROR: {
+  ERROR_SEND: {
     status: "error",
     title: "Error!",
     message: "Sending cart data failed!",
+  },
+  ERROR_FETCH: {
+    status: "error",
+    title: "Error!",
+    message: "Fetching cart data failed!",
   },
 };
